@@ -11,10 +11,18 @@ class Board:
         :param n: Our board size. n*n in square tiles. Must be > 0
         :param t: Each treasure label must be between 1 and t, inclusive.
         """
+        total_t =0
+
         if n <= 0:
             raise ValueError("Invalid board dimensions")
         elif int(t) <= 0 or int(t) > n * n:
             raise ValueError("Invalid treasure input")
+        elif (n*n) < sum([total_t + num for num in range(int(t)+1)]):
+            raise ValueError("Not Enough Spaces for t values")
+        elif int(t) > n:
+            raise ValueError("t too long too fit")
+
+
         self.n = n
         self.t = t
         self.board = [['-' for _ in range(n)] for _ in range(self.n)]
@@ -37,12 +45,9 @@ class Board:
         while treasurecount > 0:
             placed = False
 
-            # Avoid infinite loop by counting till 100 to determine if there is any valid placements
-            attempts = 0
-            max_attempts = 100
 
-            # Keep running till placement is found or we reach max attempts
-            while not placed and attempts < max_attempts:
+            # Keep running till placement is found
+            while not placed:
                 row = random.randint(0, self.n - 1)
                 col = random.randint(0, self.n - 1)
                 direction = random.choice(list(directions.values()))
@@ -50,7 +55,7 @@ class Board:
                 # Placeholder row and col
                 temp_row, temp_col = row, col
 
-                # Temp list that tracks all positions to be filled
+                # Counter list that tracks all positions to be filled
                 positions = []
 
                 for _ in range(treasurecount):
@@ -88,18 +93,17 @@ class Board:
                     # for each position in the list, set the board position to the treasurecount
                     for pos_row, pos_col in positions:
                         self.board[pos_row][pos_col] = str(treasurecount)
-                        # Take us out of while loop
+
                     placed = True
+                    # Decrement treasurecount and proceed with next treasure t label
+                    treasurecount -= 1
 
-                # Else Attempt count ++
-                attempts += 1
 
-            # If we exit the loop without placing, print a warning, but still continue with the rest
-            if not placed:
-                print(f"Warning: Could not place treasure of size {treasurecount}")
 
-            # Decrement treasurecount and proceed with next treasure t label
-            treasurecount -= 1
+
+
+
+
 
     def pick(self, row: int, col: int) -> str:
         """

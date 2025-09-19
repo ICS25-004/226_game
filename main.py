@@ -1,7 +1,11 @@
 from Board import Board
 
-b = Board(10, '4')
-print(b)
+t = 3
+total = 0
+print(sum([total + num for num in range(t+1)]))
+
+b = Board(4, '4')
 
 
-# print(b.pick(1,2))
+
+print(b.pick(3,3))
