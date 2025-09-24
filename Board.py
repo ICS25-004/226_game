@@ -28,6 +28,7 @@ class Board:
         self.board = [['-' for _ in range(n)] for _ in range(self.n)]
         self.place_treasure()
 
+
     def place_treasure(self):
         """
         Called when the board is __init___
@@ -100,23 +101,20 @@ class Board:
 
 
 
-
-
-
-
-
-    def pick(self, row: int, col: int) -> str:
+    def pick(self, row: int, col: int) -> int:
         """
         :param row: Chosen row int value
         :param col: Chosen col int value
         :return: Applicable value of treasure (if treasure not blank).
         Value equivalent to treasure label
         """
-        if not (0 <= row < self.n and 0 <= col < self.n):
-            return '-'
         value = self.board[row][col]
         self.board[row][col] = '-'
-        return value
+        if value != '-':
+            return int(value)
+        else:
+            return 0
+
 
     def __str__(self):
         """
