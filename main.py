@@ -3,8 +3,9 @@ from Player import Player
 
 
 #Initialize Board and Player
-b = Board(5, '5')
-p1 = Player('One', 0)
+
+b = Board(1, '2')
+p1 = Player('One')
 
 def runGame():
     game_active = True
@@ -15,13 +16,10 @@ def runGame():
             print("Select a Row & Column...")
             print("Row: ")
             row = int(input())
-            if row < 0 or row > b.n - 1:
-                raise ValueError
 
             print("Column: ")
             col = int(input())
-            if col < 0 or col > b.n - 1:
-                raise ValueError
+
         except ValueError:
             print("\033[31mInvalid Input. Try again.\033[0m")
             #continue to the next turn

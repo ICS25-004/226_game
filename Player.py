@@ -1,7 +1,7 @@
 class Player:
 
 
-    def __init__(self, name: str, score: int) -> None:
+    def __init__(self, name: str) -> None:
         """
         Initializer for creating a new instance of the class.
 
@@ -14,7 +14,7 @@ class Player:
         :type score: int
         """
         self.name = name
-        self.score = score
+        self.score = 0
         self.get_score()
 
 

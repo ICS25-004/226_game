@@ -1,4 +1,5 @@
 import random
+from functools import reduce
 
 
 class Board:
@@ -11,16 +12,11 @@ class Board:
         :param n: Our board size. n*n in square tiles. Must be > 0
         :param t: Each treasure label must be between 1 and t, inclusive.
         """
-        total_t =0
-
-        if n <= 0:
-            raise ValueError("Invalid board dimensions")
-        elif int(t) <= 0 or int(t) > n * n:
-            raise ValueError("Invalid treasure input")
-        elif (n*n) < sum([total_t + num for num in range(int(t)+1)]):
-            raise ValueError("Not Enough Spaces for t values")
-        elif int(t) > n:
-            raise ValueError("t too long too fit")
+        if type(n)!= int: raise ValueError("n must be an int")
+        if n < 2: raise ValueError("n must not be less than 2")
+        if not t.isdigit() or int(t) <= 0: raise ValueError("t must be digit greater 0")
+        if int(t) <= 0 or int(t) > n: raise ValueError("Treasure t length cant be greater than n board length")
+        if (n * n) < sum([num for num in range(int(t) + 1)]): raise ValueError("Not Enough Board Spaces for t placement")
 
 
         self.n = n
