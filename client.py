@@ -39,7 +39,5 @@ def client_program() -> None:
                         print("Your Current Score |", get_player1_score(score_data))
                     elif name == "Two":
                         print("Your Current Score |", get_player2_score(score_data))
-                    else:
-                        continue
 
 client_program()
