@@ -19,6 +19,7 @@ def client_program() -> None:
     and sends row/column picks in a loop, printing the current score after each pick.
     :return None:
     """
+
     with socket(AF_INET, SOCK_STREAM) as sc:
         sc.connect((HOST, PORT))
         with sc:
@@ -38,5 +39,7 @@ def client_program() -> None:
                         print("Your Current Score |", get_player1_score(score_data))
                     elif name == "Two":
                         print("Your Current Score |", get_player2_score(score_data))
+                    else:
+                        continue
 
 client_program()

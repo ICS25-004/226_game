@@ -22,10 +22,11 @@ def score_into_byte(score: int) -> int:
     return score & 0b1111111
 
 def get_player1_score(byte: int) -> int:
-    return byte & 0b1111111
+    return (byte & 0b11111110000000) >> 7
+
 
 def get_player2_score(byte: int) -> int:
-    return (byte & 0b11111110000000) >> 7
+    return byte & 0b1111111
 
 def receive(sc: socket, size: int) -> bytes:
     data = b''
