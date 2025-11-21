@@ -25,7 +25,7 @@ class BoardCreationTests(TestCase):
         DEFAULT_BOARD_SIZE is set in constants.py and is 10 by default.
         10x10 = 100 tiles.
         """
-        response = self.clixent.get('/game/create')
+        response = self.client.get('/game/create')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Tile.objects.count(), DEFAULT_BOARD_SIZE * DEFAULT_BOARD_SIZE, f'Expected {DEFAULT_BOARD_SIZE * DEFAULT_BOARD_SIZE} tiles, but found {Tile.objects.count()}')
 
