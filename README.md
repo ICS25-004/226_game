@@ -1,1 +1,1 @@
-Co-authored-by: NAME <irvinecaleb1@gmail.com>
+Co-authored-by: Caleb M. Irvine <irvinecaleb1@gmail.com>
