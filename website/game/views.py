@@ -87,7 +87,7 @@ def create_board(request: HttpRequest, size: int = DEFAULT_BOARD_SIZE, treasure 
     return redirect('game')
 
 
-def game(request: HttpRequest) -> HttpResponse:
+def game(request: HttpRequest) -> HttpResponse | None:
     """
     This function displays the game page.
     It first checks if the game has been created, if not it redirects to create.
@@ -98,7 +98,7 @@ def game(request: HttpRequest) -> HttpResponse:
 
     #if the game hasn't been created yet, redirect to create
     if not Tile.objects.exists():
-        return 
+        return None
 
     players = Player.objects.all()
     tiles = Tile.objects.all().order_by('row', 'col')
@@ -178,6 +178,7 @@ def pick(request: HttpRequest, name: str, row: int, col: int) -> HttpResponse:
 def reload_board(request: HttpRequest) -> HttpResponse:
     players = Player.objects.all()
     tiles = Tile.objects.all().order_by('row', 'col')
+    message = 'Pick a tile to start the game'
     board = []
     for r in range(DEFAULT_BOARD_SIZE):
         row_tiles = [tiles.get(row=r, col=c) for c in range(DEFAULT_BOARD_SIZE)]
@@ -187,7 +188,7 @@ def reload_board(request: HttpRequest) -> HttpResponse:
         'player_list': players,
         'board': board,
         'PICKED_TILE': PICKED_TILE,
-        'game_message': 'Pick a tile to start the game'
+        'game_message': message
     })
 
 
@@ -198,6 +199,4 @@ def custom_404(request: HttpRequest, exception: Exception) -> HttpResponse:
     :param exception: Exception
     :return: HttpResponse
     """
-    return render(request, '404.html', {'message': ErrorMessages.PAGE_404}, status=404)
-def custom_404(reques: HttpRequest, exception: Exception) -> HttpResponse:
     return render(request, '404.html', {'message': ErrorMessages.PAGE_404}, status=404)
