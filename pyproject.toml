@@ -201,3 +201,8 @@ requires = [
 ]
 style_framework = "Shoelace v2.3"
 
+
+[tool.pytest.ini_options]
+pythonpath = "website"
+norecursedirs = ["src", "build"]
+DJANGO_SETTINGS_MODULE = "website.settings"
